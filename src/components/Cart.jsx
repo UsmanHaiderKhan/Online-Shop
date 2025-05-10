@@ -1,10 +1,13 @@
-export default function Cart({ items, onUpdateItemQuantity }) {
+import { useContext } from "react";
+import { ShoppingCartContext } from "../store/shopping-cart-context";
+export default function Cart({ onUpdateItemQuantity }) {
+  const { items } = useContext(ShoppingCartContext);
+
   const totalPrice = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
-
   return (
     <div id="cart">
       {items.length === 0 && <p>No items in cart!</p>}
